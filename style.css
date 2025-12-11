@@ -27,14 +27,14 @@ body {
 }
 
 /* ---------------------------------- */
-/* 2. HEADER & NAVIGATION */
+/* 2. HEADER & NAVIGATION (FIXED MOBILE MENU) */
 /* ---------------------------------- */
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 25px; /* Reduced padding for smaller screens */
+    padding: 15px 25px; 
     background: var(--bg);
     position: sticky;
     top: 0;
@@ -42,9 +42,10 @@ header {
 }
 
 .logo {
-    font-size: 1.5rem; /* Slightly smaller logo */
+    font-size: 1.5rem; 
     color: var(--accent);
     font-weight: 900;
+    text-decoration: none; 
 }
 
 /* Desktop Navigation */
@@ -72,15 +73,24 @@ header {
     color: white;
 }
 
-/* MOBILE NAVIGATION PANEL (Hidden by default) */
+/* MOBILE NAVIGATION PANEL (FIXED TO RIGHT, NARROWER WIDTH) */
 .mobile-nav {
     display: none;
     flex-direction: column;
     background: #111;
     padding: 20px 25px;
-    position: absolute;
-    top: 60px; /* Adjust based on header height */
-    width: 100%;
+    
+    /* --- FIX START --- */
+    position: fixed; /* Floats above content */
+    top: 0;          /* Start at the top */
+    right: 0;        /* Align to the right edge */
+    height: 100%;    /* Full height of the viewport */
+    width: 250px;    /* FIXED WIDTH: Narrow width for the drawer */
+    max-width: 70%;  /* Ensures it works on very small phones */
+    z-index: 1000;   /* High z-index */
+    transform: translateX(100%); /* Start off-screen (closed) */
+    transition: transform 0.3s ease-in-out;
+    /* --- FIX END --- */
 }
 
 .mobile-nav a {
@@ -95,6 +105,7 @@ header {
 
 .mobile-nav.open {
     display: flex;
+    transform: translateX(0); /* Slide into view */
 }
 
 /* Hide desktop navigation on tablet/mobile */
@@ -106,15 +117,15 @@ header {
 
 
 /* ---------------------------------- */
-/* 3. HERO SECTION & ANIMATIONS */
+/* 3. HERO SECTION & ANIMATIONS (FIXED LAYOUT) */
 /* ---------------------------------- */
 
 .hero {
     display: flex;
-    padding: 60px 25px; /* Reduced padding for mobile */
+    flex-direction: column; /* Mobile default: stacked */
     align-items: center;
+    padding: 60px 25px; 
     gap: 40px;
-    flex-direction: column; /* Stack vertically by default */
     text-align: center;
     opacity: 0;
     transform: translateY(30px);
@@ -130,7 +141,7 @@ header {
 
 /* IMAGE FRAME */
 .image-frame {
-    width: 250px; /* Smaller size for mobile */
+    width: 250px; 
     height: 250px;
     border-radius: 100%;
     overflow: hidden;
@@ -163,7 +174,7 @@ header {
 }
 
 .hero-right h1 {
-    font-size: 2.2rem; /* Smaller main heading */
+    font-size: 2.2rem;
     margin: 10px 0;
 }
 
@@ -183,13 +194,13 @@ header {
                blink 0.6s step-end 3s forwards;
 }
 
-/* Text slide/fade animations (adjusted to use vertical fade on mobile) */
+/* Text slide/fade animations (use vertical fade on mobile) */
 .hero-right h2, 
 .hero-right h1, 
 .hero-right p,
 .socials {
     opacity: 0;
-    transform: translateY(20px); /* Use vertical transform */
+    transform: translateY(20px); 
     animation: fadeInUp 1.2s ease forwards;
 }
 
@@ -212,23 +223,23 @@ header {
     100% { border-color: transparent; }
 }
 
-/* Buttons */
+/* Buttons (Stacked vertically on mobile) */
 .btn-group {
     margin-top: 20px;
     display: flex;
-    flex-direction: column; /* Stacked buttons on mobile */
+    flex-direction: column; 
     gap: 10px;
 }
 
 .btn,
 .btn-outline {
-    padding: 10px 20px; /* Smaller padding */
+    padding: 10px 20px;
     border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
     text-decoration: none;
     transition: 0.3s;
-    width: 100%; /* Full width buttons */
+    width: 100%; 
     text-align: center;
 }
 
@@ -255,7 +266,7 @@ header {
 .socials {
     margin-top: 20px;
     display: flex;
-    justify-content: center; /* Center on mobile */
+    justify-content: center; 
     gap: 15px;
 }
 
@@ -263,6 +274,7 @@ header {
     color: var(--accent);
     font-size: 2.0rem;
     transition: transform 0.3s ease, color 0.3s ease;
+    text-decoration: none; 
 }
 
 .socials a:hover {
@@ -270,17 +282,18 @@ header {
     color: #ff4d4d;
 }
 
-/* Tablet and Desktop adjustments */
+/* Tablet (768px) and Desktop FIX: Restore side-by-side layout */
 @media (min-width: 768px) {
     .hero {
         padding: 100px 60px;
-        flex-direction: row; /* Horizontal layout returns */
+        flex-direction: row; /* FIX: Image on left, Text/Buttons on right */
         text-align: left;
+        align-items: center; 
     }
     
     .image-frame {
-        width: 450px;
-        height: 450px;
+        width: 400px;
+        height: 400px;
         margin-bottom: 0;
     }
 
@@ -289,7 +302,7 @@ header {
     }
 
     .btn-group {
-        flex-direction: row; /* Buttons side-by-side */
+        flex-direction: row; /* FIX: Buttons side-by-side */
         gap: 20px;
     }
     
@@ -298,10 +311,10 @@ header {
     }
     
     .socials {
-        justify-content: flex-start;
+        justify-content: flex-start; 
     }
     
-    /* Revert to horizontal animation */
+    /* FIX: Revert to original horizontal slide-in animation */
     .hero-right h2, 
     .hero-right h1, 
     .hero-right p,
@@ -324,7 +337,7 @@ header {
 
 /* PAGE TITLES */
 .section-title {
-    font-size: 1.8rem; /* Smaller title for mobile */
+    font-size: 1.8rem; 
     margin: 30px 0 20px 0;
     color: var(--accent);
     text-align: center; 
@@ -357,9 +370,9 @@ header {
 
 .gallery {
     display: flex;
-    flex-direction: column; /* Stack the cards vertically */
+    flex-direction: column; 
     align-items: center; 
-    padding: 20px 25px; /* Reduced padding */
+    padding: 20px 25px; 
     gap: 30px; 
 }
 
@@ -378,7 +391,6 @@ header {
 
 .card-content {
     display: grid;
-    /* Keeps the image on the left (40%) and text on the right (60%) on desktop */
     grid-template-columns: 1.2fr 1.8fr; 
     gap: 0; 
     align-items: stretch;
@@ -398,7 +410,7 @@ header {
 }
 
 .image-card:hover {
-    transform: translateY(-5px); /* Adjusted for mobile/gallery page */
+    transform: translateY(-5px); 
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
@@ -429,7 +441,7 @@ header {
 /* Gallery Mobile Stacking */
 @media (max-width: 650px) {
     .card-content {
-        grid-template-columns: 1fr; /* Stacks image and description vertically */
+        grid-template-columns: 1fr; 
     }
 }
 
@@ -441,7 +453,7 @@ header {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 25px;
-    padding: 0 25px 60px 25px; /* Reduced padding */
+    padding: 0 25px 60px 25px; 
 }
 
 .about-card {
@@ -474,7 +486,7 @@ header {
 /* ---------------------------------- */
 
 .skills {
-    padding: 20px 25px 60px 25px; /* Reduced padding */
+    padding: 20px 25px 60px 25px; 
 }
 
 .skill-grid {
@@ -576,7 +588,7 @@ header {
 
 .school-card .images img,
 .school-card .images iframe {
-    flex: 1 1 100%; /* Full width stacking for mobile */
+    flex: 1 1 100%; 
     max-width: 100%;
     height: 200px; 
     object-fit: cover;
@@ -633,11 +645,11 @@ header {
 }
 
 .projects-container {
-    width: 95%; /* Use more width on mobile */
+    width: 95%; 
     max-width: 1000px;
     margin: auto;
     display: grid;
-    grid-template-columns: 1fr; /* Single column on mobile */
+    grid-template-columns: 1fr; 
     gap: 20px;
     padding: 0 15px;
 }
@@ -646,7 +658,7 @@ header {
     background: var(--card);
     padding: 22px;
     border-radius: 12px;
-    border-left: 4px solid #4f6cff; /* Slightly thinner border */
+    border-left: 4px solid #4f6cff; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transition: 0.25s ease-in-out;
     animation: fadeInUp 0.5s ease both;
@@ -674,7 +686,7 @@ header {
 /* Responsive Grid Adjustments */
 @media (min-width: 700px) {
     .projects-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+        grid-template-columns: repeat(2, 1fr); 
         padding: 0 25px;
     }
     .page-title {
@@ -693,8 +705,8 @@ header {
 /* ---------------------------------- */
 
 .hobbies-form {
-    width: 90%; /* Full width on mobile */
-    max-width: 500px; /* Limits size on desktop */
+    width: 90%; 
+    max-width: 500px; 
     margin: 40px auto;
     display: flex;
     flex-direction: column;
