@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo"></div>
+
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="projects.html">About me</a>
+            <a href="skills.html">My Hobbies</a>
+            <a href="contact.html">School attended</a>
+        </nav>
+
+        <div class="menu-btn"><i class="fa-solid fa-bars"></i></div>
+    </header>
+
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav">
+        <a href="index.html">Home</a>
+        <a href="projects.html">About me</a>
+        <a href="skills.html">My hobbies</a>
+        <a href="contact.html">School attended</a>
+    </nav>
+
+    <main>
+
+        <!-- HERO SECTION (Home) -->
+        <section class="hero">
+
+            <div class="hero-left">
+                <div class="image-frame">
+                    <img src="your-photo.jpg" alt="Profile photo">
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <h2>Hello, I'm <span>Jastin Kirl N. Uriarte </span></h2>
+                <h1>Student</h1>
+
+                <p>
+                    I currently taking Bachelor of Science in Computer Science at Caraga State University.
+                    I am a transferee student from Saint Joseph Institute of Technology where I finish Bachelor of Science in Information Technology (First year).
+                  
+
+                </p>
+
+                <!-- Buttons removed here -->
+                <!-- Removed btn-group completely -->
+
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>2025 Jastin Portfolio — All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const menuBtn = document.querySelector(".menu-btn");
+        const mobileNav = document.querySelector(".mobile-nav");
+
+        menuBtn.addEventListener("click", () => {
+            mobileNav.classList.toggle("open");
+        });
+    </script>
+
+</body>
+</html>
