@@ -1,8 +1,121 @@
+/* ---------------------------------- */
+/* 1. CSS VARIABLES AND RESET */
+/* ---------------------------------- */
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+}
+
+/* COLOR VARIABLES */
+:root {
+    --accent: #ff5c57;
+    --bg: #0d0d0d;
+    --card: #1b1b1b;
+    --description-bg: #252424;
+    --title-color: #ff9900;
+}
+
+body {
+    background: var(--bg);
+    color: rgb(255, 252, 252);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------------------------------- */
+/* 2. HEADER & NAVIGATION */
+/* ---------------------------------- */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px; /* Reduced padding for smaller screens */
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem; /* Slightly smaller logo */
+    color: var(--accent);
+    font-weight: 900;
+}
+
+/* Desktop Navigation */
+.nav {
+    display: flex;
+}
+
+.nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: var(--accent);
+}
+
+/* MOBILE MENU BUTTON (Visible on mobile) */
+.menu-btn {
+    display: block; 
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+}
+
+/* MOBILE NAVIGATION PANEL (Hidden by default) */
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: #111;
+    padding: 20px 25px;
+    position: absolute;
+    top: 60px; /* Adjust based on header height */
+    width: 100%;
+}
+
+.mobile-nav a {
+    padding: 10px 0;
+    text-decoration: none;
+    color: white;
+}
+
+.mobile-nav a:hover {
+    color: var(--accent);
+}
+
+.mobile-nav.open {
+    display: flex;
+}
+
+/* Hide desktop navigation on tablet/mobile */
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+}
 
 
+/* ---------------------------------- */
+/* 3. HERO SECTION & ANIMATIONS */
+/* ---------------------------------- */
 
-/* Fade-in for whole hero section */
 .hero {
+    display: flex;
+    padding: 60px 25px; /* Reduced padding for mobile */
+    align-items: center;
+    gap: 40px;
+    flex-direction: column; /* Stack vertically by default */
+    text-align: center;
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 1.2s ease forwards;
@@ -15,8 +128,25 @@
     }
 }
 
+/* IMAGE FRAME */
 .image-frame {
+    width: 250px; /* Smaller size for mobile */
+    height: 250px;
+    border-radius: 100%;
+    overflow: hidden;
+    border: 6px solid var(--accent);
+    box-shadow: 0 0 40px rgba(255, 80, 80, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px; 
     animation: pulseGlow 3s infinite alternate ease-in-out;
+}
+
+.image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @keyframes pulseGlow {
@@ -28,39 +158,45 @@
     }
 }
 
+.hero-right {
+    max-width: 100%;
+}
+
+.hero-right h1 {
+    font-size: 2.2rem; /* Smaller main heading */
+    margin: 10px 0;
+}
+
+.hero-right h2 {
+    font-size: 1.1rem;
+    line-height: 1.2;
+}
+
+.hero-right h2 span {
+    color: var(--accent);
+    border-right: 3px solid #ff4d4d;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    width: 0;
+    animation: typing 3s steps(30) forwards,
+               blink 0.6s step-end 3s forwards;
+}
+
+/* Text slide/fade animations (adjusted to use vertical fade on mobile) */
 .hero-right h2, 
 .hero-right h1, 
 .hero-right p,
 .socials {
     opacity: 0;
-    transform: translateX(40px);
-    animation: slideFade 1.2s ease forwards;
+    transform: translateY(20px); /* Use vertical transform */
+    animation: fadeInUp 1.2s ease forwards;
 }
 
 .hero-right h2 { animation-delay: 0.3s; }
 .hero-right h1 { animation-delay: 0.6s; }
 .hero-right p { animation-delay: 0.9s; }
 .socials       { animation-delay: 1.2s; }
-
-@keyframes slideFade {
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.hero-right h2 span {
-    border-right: 3px solid #ff4d4d;
-    white-space: nowrap;
-    overflow: hidden;
-    display: inline-block;
-    width: 0;
-
-    /* Typing happens first. Blink only during typing. 
-       Then cursor disappears (no more blinking). */
-    animation: typing 3s steps(30) forwards,
-               blink 0.6s step-end 3s forwards;
-}
 
 /* Typing animation */
 @keyframes typing {
@@ -69,162 +205,31 @@
     }
 }
 
-/* Cursor blink (only during typing) */
+/* Cursor blink */
 @keyframes blink {
     0% { border-color: #ff4d4d; }
     50% { border-color: transparent; }
-    100% { border-color: transparent; } /* cursor removed after typing */
+    100% { border-color: transparent; }
 }
 
-
-.socials a {
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.socials a:hover {
-    transform: translateY(-5px) scale(1.2);
-    color: #ff4d4d;
-}
-
-
-
-
-/* RESET */
-
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Poppins, sans-serif;
-}
-
-body {
-    background: #0d0d0d;
-    color: rgb(255, 252, 252);
-}
-
-/* COLOR VARIABLES */
-:root {
-    --accent: #ff5c57;
-    --bg: #0d0d0d;
-    --card: #1b1b1b;
-    --description-bg: #111; /* Dark background for description box */
-    --title-color: #ff9900; /* Orange color from the image for section titles */
-}
-
-/* HEADER */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 60px;
-    background: var(--bg);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.logo {
-    font-size: 1.8rem;
-    color: var(--accent);
-    font-weight: 900;
-}
-
-.nav a {
-    margin-left: 30px;
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-    transition: 0.3s;
-}
-
-.nav a:hover {
-    color: var(--accent);
-}
-
-/* MOBILE MENU BUTTON */
-.menu-btn {
-    display: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-}
-
-/* MOBILE NAVIGATION PANEL */
-.mobile-nav {
-    display: none;
-    flex-direction: column;
-    background: #111;
-    padding: 20px;
-}
-
-.mobile-nav a {
-    padding: 10px 0;
-    text-decoration: none;
-    color: white;
-}
-
-.mobile-nav.open {
-    display: flex;
-}
-
-/* HERO SECTION - HOME PAGE */
-.hero {
-    display: flex;
-    padding: 100px 60px;
-    align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
-}
-
-/* IMAGE FRAME */
-.image-frame {
-    width: 450px;
-    height: 450px;
-    border-radius: 100%;
-    overflow: hidden;
-    border: 6px solid var(--accent);
-    box-shadow: 0 0 40px rgba(255, 80, 80, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* FIXED — now your photo fits perfectly */
-.image-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero-right {
-    max-width: 500px;
-}
-
-.hero-right h1 {
-    font-size: 3rem;
-    margin: 10px 0;
-}
-
-.hero-right h2 span {
-    color: var(--accent);
-}
-
-
-/* BUTTONS */
+/* Buttons */
 .btn-group {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Stacked buttons on mobile */
+    gap: 10px;
 }
 
 .btn,
 .btn-outline {
-    padding: 12px 35px;
+    padding: 10px 20px; /* Smaller padding */
     border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
     text-decoration: none;
     transition: 0.3s;
+    width: 100%; /* Full width buttons */
+    text-align: center;
 }
 
 .btn {
@@ -246,107 +251,95 @@ header {
     color: white;
 }
 
-/* SOCIAL ICONS */
+/* Social Icons */
+.socials {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; /* Center on mobile */
+    gap: 15px;
+}
+
 .socials a {
     color: var(--accent);
-    margin-right: 20px;
     font-size: 2.0rem;
-    transition: 0.3s;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .socials a:hover {
-    color: white;
+    transform: translateY(-5px) scale(1.2);
+    color: #ff4d4d;
 }
+
+/* Tablet and Desktop adjustments */
+@media (min-width: 768px) {
+    .hero {
+        padding: 100px 60px;
+        flex-direction: row; /* Horizontal layout returns */
+        text-align: left;
+    }
+    
+    .image-frame {
+        width: 450px;
+        height: 450px;
+        margin-bottom: 0;
+    }
+
+    .hero-right h1 {
+        font-size: 3rem;
+    }
+
+    .btn-group {
+        flex-direction: row; /* Buttons side-by-side */
+        gap: 20px;
+    }
+    
+    .btn, .btn-outline {
+        width: auto;
+    }
+    
+    .socials {
+        justify-content: flex-start;
+    }
+    
+    /* Revert to horizontal animation */
+    .hero-right h2, 
+    .hero-right h1, 
+    .hero-right p,
+    .socials {
+        transform: translateX(40px);
+        animation: slideFade 1.2s ease forwards;
+    }
+    
+    @keyframes slideFade {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+}
+
+/* ---------------------------------- */
+/* 4. GENERAL SECTIONS STYLES */
+/* ---------------------------------- */
 
 /* PAGE TITLES */
 .section-title {
-    font-size: 2.2rem;
+    font-size: 1.8rem; /* Smaller title for mobile */
     margin: 30px 0 20px 0;
     color: var(--accent);
-    text-align: left;
-    padding-left: 60px;
+    text-align: center; 
+    padding: 0 25px;
 }
 
-/* about PAGE */
-@keyframes slideDown {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
+@media (min-width: 768px) {
+    .section-title {
+        font-size: 2.2rem;
+        text-align: left;
+        padding-left: 60px;
     }
 }
-
-.gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    padding: 50px 20px;
-}
-
-.image-card {
-    background-color: white;
-    border-radius: 15px;
-    overflow: hidden;
-    width: 300px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-    opacity: 0;
-    animation: popUp 0.6s forwards;
-}
-
-/* Pop-up animation */
-@keyframes popUp {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.image-card img {
-    width: 100%;
-    display: block;
-    transition: transform 0.5s;
-}
-
-/* Pop effect on hover */
-.image-card:hover img {
-    transform: scale(1.1);
-}
-
-.image-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.3);
-}
-
-.description-box {
-    padding: 20px;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-}
-
 
 /* SIMPLE CARD FADE + SLIDE UP */
-.image-card {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: simpleFade 0.8s ease forwards;
-    transition: 0.3s ease;
-}
-
-/* Keyframes for simple fade in */
 @keyframes simpleFade {
     from {
         opacity: 0;
@@ -358,20 +351,97 @@ footer {
     }
 }
 
-/* SIMPLE IMAGE HOVER ZOOM */
-.image-card img {
-    transition: 0.3s ease;
+/* ---------------------------------- */
+/* 5. ABOUT ME / GALLERY PAGE (HOBBIES) */
+/* ---------------------------------- */
+
+.gallery {
+    display: flex;
+    flex-direction: column; /* Stack the cards vertically */
+    align-items: center; 
+    padding: 20px 25px; /* Reduced padding */
+    gap: 30px; 
 }
 
-.image-card img:hover {
+.image-card {
+    max-width: 550px; 
+    width: 100%; 
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    overflow: hidden; 
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    animation: simpleFade 0.8s ease forwards;
+}
+
+.card-content {
+    display: grid;
+    /* Keeps the image on the left (40%) and text on the right (60%) on desktop */
+    grid-template-columns: 1.2fr 1.8fr; 
+    gap: 0; 
+    align-items: stretch;
+}
+
+.image-card img,
+.image-card video {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+    display: block; 
+    transition: transform 0.3s ease;
+}
+
+.image-card:hover img {
     transform: scale(1.05);
 }
+
+.image-card:hover {
+    transform: translateY(-5px); /* Adjusted for mobile/gallery page */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.description-box {
+    padding: 20px;
+    background-color: var(--description-bg);
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.description-box h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: white;
+    border-bottom: 2px solid #232222;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.description-box p {
+    font-size: 1em;
+    line-height: 1.5;
+    color: #f2eded;
+}
+
+/* Gallery Mobile Stacking */
+@media (max-width: 650px) {
+    .card-content {
+        grid-template-columns: 1fr; /* Stacks image and description vertically */
+    }
+}
+
+/* ---------------------------------- */
+/* 6. ABOUT-ME GRID (Projects/Services) */
+/* ---------------------------------- */
 
 .about-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 25px;
-    padding: 0 60px 60px 60px;
+    padding: 0 25px 60px 25px; /* Reduced padding */
 }
 
 .about-card {
@@ -379,6 +449,8 @@ footer {
     padding: 20px;
     border-radius: 8px;
     transition: 0.3s;
+    opacity: 0;
+    animation: simpleFade 0.8s ease forwards;
 }
 
 .about-card:hover {
@@ -397,9 +469,12 @@ footer {
     display: inline-block;
 }
 
-/* SKILLS PAGE */
+/* ---------------------------------- */
+/* 7. SKILLS PAGE */
+/* ---------------------------------- */
+
 .skills {
-    padding: 20px 60px 60px 60px;
+    padding: 20px 25px 60px 25px; /* Reduced padding */
 }
 
 .skill-grid {
@@ -428,240 +503,44 @@ footer {
     border-radius: 5px;
 }
 
-/* CONTACT PAGE */
-.hobbies-form {
-    width: 50%;
-    margin: 40px auto;
-    display: flex;
-    flex-direction: column;
-   
-}
-
-.hobbies-form input,
-.hobbies-form textarea {
-    margin-bottom: 15px;
-    padding: 12px;
-    background: #222;
-    border: none;
-    color: white;
-}
-
-.hobbies-form button {
-    width: 150px;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #111;
-    margin-top: 40px;
-}
-
 /* ---------------------------------- */
-/* GALLERY PAGE - ABOUT ME */
+/* 8. SCHOOL ATTENDED SECTION */
 /* ---------------------------------- */
-
-.gallery {
-    /* Set the main content area to use flexbox */
-    display: flex;
-    /* Allow items to wrap to the next line */
-    flex-wrap: wrap;
-    /* Center the cards */
-    justify-content: center; 
-    /* Add some padding around the gallery */
-    padding: 20px 60px;
-    gap: 30px; /* Space between rows/columns of cards */
-}
-
-.gallery {
-    display: flex;
-    flex-direction: column; /* Stack the cards vertically */
-    align-items: center; /* Center the cards on the page */
-    padding: 15px; /* Slightly less padding */
-    gap: 30px; /* Reduced space between each image card */
-}
-
-.image-card {
-    /* REDUCED MAX-WIDTH: Makes the card smaller to fit more on the screen */
-    max-width: 550px; 
-    width: 90%; /* Make it responsive up to 650px */
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    overflow: hidden; 
-    border-radius: 8px;
-}
-
-/* --- card-content: Remains the same to keep the side-by-side layout --- */
-.card-content {
-    display: grid;
-    /* Keeps the image on the left (40%) and text on the right (60%) */
-    grid-template-columns: 1.2fr 1.8fr; 
-    gap: 0; 
-    align-items: stretch;
-}
-
-.image-card img,
-.image-card video {
-    width: 100%;
-    height: 100%; 
-    object-fit: cover;
-    display: block; 
-}
-
-/* --- Description Box: Adjusted for the new, narrower card size --- */
-.description-box {
-    padding: 20px; /* Slightly reduced padding */
-    background-color: #252424;
-    height: 100%; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.description-box h2 {
-    margin-top: 0;
-    font-size: 1.5em; /* Slightly smaller heading */
-    border-bottom: 2px solid #232222;
-    padding-bottom: 8px;
-    margin-bottom: 15px;
-}
-
-.description-box p {
-    font-size: 1em; /* Slightly smaller body text */
-    line-height: 1.5;
-}
-
-/* --- Media Query for smaller screens --- */
-@media (max-width: 768px) {
-    .card-content {
-        /* Stacks the image and text box vertically on mobile */
-        grid-template-columns: 1fr;
-    }
-}
-
-
-/* school  */
-
 
 .school-section {
-    max-width: 900px;
-    margin: auto;
+    padding: 40px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
 }
 
 .school-section h1 {
-    text-align: center;
-    font-size: 45px;
-    margin-bottom: 30px;
-    font-weight: bold;
+    font-size: 2rem;
+    color: var(--title-color, orange);
+    margin-bottom: 20px;
 }
 
 .school-card {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    margin-bottom: 25px;
-}
-
-.school-card h2 {
-    font-size: 30px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.school-name,
-.description {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.images {
-    display: flex;
-    gap: 20px;
-    margin-top: 10px;
-}
-
-.images img {
-    width: 48%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 12px;
-    border: 3px solid #ddd;
-}
-
-.school-card {
-    background: #111;               /* dark card like your sample */
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    margin-bottom: 30px;
-    color: #fff;
-    border: 1px solid #333;
-}
-
-.school-card h2 {
-    font-size: 28px;
-    margin-bottom: 12px;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-.school-name {
-    font-size: 17px;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #dcdcdc;
-}
-
-.description {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #e5e5e5;
-    margin-bottom: 15px;
-}
-
-.images img {
+    max-width: 800px; 
     width: 100%;
-    max-width: 48%;
-    height: 230px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 2px solid #444;
-    transition: 0.3s ease;
-}
-
-.images img:hover {
-    transform: scale(1.03);
-    border-color: #888;
-}
-
-/* ==== CARD ANIMATION ==== */
-.school-card {
-    background: #111;
+    background-color: var(--card, #1b1b1b); 
     padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    margin-bottom: 30px;
-    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: white;
     border: 1px solid #333;
-
     /* animation */
     opacity: 0;
     transform: translateY(30px);
     animation: fadeSlideUp 0.8s ease forwards;
 }
 
-/* delay for staggered effect */
+/* Staggered animation */
 .school-card:nth-child(2) { animation-delay: 0.15s; }
 .school-card:nth-child(3) { animation-delay: 0.3s; }
 .school-card:nth-child(4) { animation-delay: 0.45s; }
-.school-card:nth-child(5) { animation-delay: 0.6s; }
-.school-card:nth-child(6) { animation-delay: 0.75s; }
-.school-card:nth-child(7) { animation-delay: 0.9s; }
 
-/* animation keyframes */
 @keyframes fadeSlideUp {
     0% {
         opacity: 0;
@@ -673,95 +552,9 @@ footer {
     }
 }
 
-/* ==== TEXT STYLING ==== */
-.school-card h2 {
-    font-size: 28px;
-    margin-bottom: 12px;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-.school-name {
-    font-size: 17px;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #dcdcdc;
-}
-
-.description {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #e5e5e5;
-    margin-bottom: 15px;
-}
-
-/* ==== IMAGE ANIMATION ==== */
-.images img {
-    width: 100%;
-    max-width: 48%;
-    height: 230px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 2px solid #444;
-    transition: 0.3s ease;
-    
-    /* zoom animation */
-    animation: zoomIn 0.8s ease forwards;
-    opacity: 0;
-}
-
-.images img:nth-child(1) { animation-delay: 1s; }
-.images img:nth-child(2) { animation-delay: 1.15s; }
-
-/* zoom animation keyframes */
-@keyframes zoomIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.images img:hover {
-    transform: scale(1.05);
-    border-color: #888;
-}
-
-/* ---------------------------------- */
-/* SCHOOL ATTENDED SECTION STYLES */
-/* ---------------------------------- */
-
-.school-section {
-    padding: 40px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px; /* Space between the grade cards */
-}
-
-.school-section h1 {
-    font-size: 2.5rem;
-    color: var(--title-color, orange); /* Uses your orange variable if available */
-    margin-bottom: 20px;
-}
-
-.school-card {
-    /* Sets the maximum width for the card, adjust as needed */
-    max-width: 800px; 
-    width: 100%;
-    background-color: var(--card-dark, #1b1b1b); 
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    color: white;
-}
-
 .school-card h2 {
     font-size: 1.8em;
-    color: var(--accent, #ff5c57); /* Uses your accent color */
+    color: var(--accent, #ff5c57);
     border-bottom: 2px solid #333;
     padding-bottom: 10px;
     margin-bottom: 15px;
@@ -773,63 +566,65 @@ footer {
     line-height: 1.5;
 }
 
-/* --- Image Container (Displays Images Side-by-Side) --- */
 .school-card .images {
     display: flex;
-    gap: 15px; /* Space between the images */
+    gap: 15px;
     margin-top: 20px;
-    /* Allows images to wrap on very small screens if they exceed max-width */
     flex-wrap: wrap; 
     justify-content: center;
 }
 
-.school-card .images img {
-    /* Makes both images take up equal space */
-    flex: 1 1 45%; 
+.school-card .images img,
+.school-card .images iframe {
+    flex: 1 1 100%; /* Full width stacking for mobile */
     max-width: 100%;
-    /* Ensures consistent height and clean crop for all images */
-    height: 250px; 
+    height: 200px; 
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid #444;
+    transition: 0.3s ease;
+    
+    /* zoom animation */
+    animation: zoomIn 0.8s ease forwards;
+    opacity: 0;
 }
 
-/* --- Iframe (For your Facebook video embed) --- */
-.school-card .images iframe {
-    /* Ensures the iframe is treated as an equal item in the flex container */
-    flex: 1 1 45%;
-    max-width: 100%;
-    border-radius: 8px;
+.school-card .images img:hover {
+    transform: scale(1.05);
+    border-color: #888;
 }
 
-/* Media Query for Mobile: Stacks images vertically on small screens */
-@media (max-width: 600px) {
-    .school-card .images {
-        flex-direction: column;
-        gap: 10px;
+/* Staggered image animation */
+.school-card .images img:nth-child(1) { animation-delay: 1s; }
+.school-card .images img:nth-child(2) { animation-delay: 1.15s; }
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
     }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Tablet: Restore two columns for images/iframes */
+@media (min-width: 600px) {
     .school-card .images img,
     .school-card .images iframe {
-        height: auto; /* Let the height be determined by the image ratio on mobile */
-        flex: 1 1 100%;
+        flex: 1 1 45%; 
+        height: 250px;
     }
 }
 
+/* ---------------------------------- */
+/* 9. PROJECTS PAGE (Timeline/Cards) */
+/* ---------------------------------- */
 
-/* ---------- GLOBAL DESIGN ---------- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-
-
-/* ---------- PAGE TITLE ---------- */
 .page-title {
     text-align: center;
-    font-size: 2.3rem;
+    font-size: 1.8rem;
     margin-top: 30px;
     margin-bottom: 20px;
     font-weight: 700;
@@ -837,64 +632,53 @@ footer {
     letter-spacing: 1px;
 }
 
-/* ---------- PROJECTS CONTAINER ---------- */
 .projects-container {
-    width: 90%;
+    width: 95%; /* Use more width on mobile */
     max-width: 1000px;
     margin: auto;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column on mobile */
     gap: 20px;
+    padding: 0 15px;
 }
 
-/* ---------- PROJECT CARD DESIGN ---------- */
 .project-card {
-   
+    background: var(--card);
     padding: 22px;
     border-radius: 12px;
-    border-left: 6px solid #4f6cff;
+    border-left: 4px solid #4f6cff; /* Slightly thinner border */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transition: 0.25s ease-in-out;
     animation: fadeInUp 0.5s ease both;
+    color: #fff;
 }
 
-/* Card Titles */
 .project-card h2 {
     margin-bottom: 10px;
-    color: #2a3faf;
-    font-size: 1.4rem;
+    color: #2e52ff;
+    font-size: 1.3rem;
 }
 
-/* Card Text */
 .project-card p {
     font-size: 0.95rem;
     line-height: 1.6;
     color: #f2eded;
 }
 
-/* Hover Effects */
 .project-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
     border-left-color: #2e52ff;
 }
 
-/* ---------- SIMPLE ANIMATION ---------- */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ---------- RESPONSIVE DESIGN ---------- */
+/* Responsive Grid Adjustments */
 @media (min-width: 700px) {
     .projects-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+        padding: 0 25px;
+    }
+    .page-title {
+        font-size: 2.3rem;
     }
 }
 
@@ -902,4 +686,56 @@ footer {
     .projects-container {
         grid-template-columns: repeat(3, 1fr);
     }
+}
+
+/* ---------------------------------- */
+/* 10. CONTACT PAGE */
+/* ---------------------------------- */
+
+.hobbies-form {
+    width: 90%; /* Full width on mobile */
+    max-width: 500px; /* Limits size on desktop */
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.hobbies-form input,
+.hobbies-form textarea {
+    margin-bottom: 15px;
+    padding: 12px;
+    background: #222;
+    border: none;
+    color: white;
+    border-radius: 4px;
+}
+
+.hobbies-form button {
+    width: 150px;
+    padding: 12px 35px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+    background: var(--accent);
+    color: white;
+    border: none;
+}
+
+.hobbies-form button:hover {
+    background: #ff3d37;
+}
+
+/* ---------------------------------- */
+/* 11. FOOTER */
+/* ---------------------------------- */
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #111;
+    margin-top: 40px;
+    font-size: 0.9rem;
+    color: white;
 }
